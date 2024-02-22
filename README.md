@@ -1,3 +1,3 @@
 #Script - Introdução à Linguagem R
 
-Trabalhados na aula do dia 21/02
+Códigos trabalhados na aula do dia 21/02
