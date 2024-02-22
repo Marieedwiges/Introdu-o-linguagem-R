@@ -264,6 +264,118 @@ library(bbplot)
 
 
 
+## Reta de regressao ---------------------------
+
+# Usando o geom_smooth
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+?geom_smooth()
+
+lm(Sepal.Length ~ Sepal.Width, data = iris)
+
+# Color x fill no geom_smooth()
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "#6EC769E4", fill = "purple")
+
+
+# Obs: se voce ja tiver o seu modelo estatistico, ao inves do geom_smooth, voce pode adicionar: geom_abline(intercept = intercepto, slope = inclinacao)
+# Criando modelo de regressao
+
+
+# Grafico
+
+
+
+
+### Cor -------------------------
+
+# Existem pacotes INCRIVEIS para mexer com cores!
+# O que eu recomendo MUITO e o colourpicker, porque ele tem addins maravilhosos! O addin executa uma funcao de um pacote de um modo interativo... No caso do colourpicker existem dois addins: o plot colour helper e o colour picker. O primeiro abre uma aba no navegador e voc? pode ver um grafico generico e escolher as cores, ja o segundo abre uma janela no proprio RStudio e permite que voce escolha cores. Isso permite cores personalizadas.
+install.packages("colourpicker")
+colourpicker::plotHelper()
+
+# CUIDADO COM A COOOOOOOOOOOOOOOOOOOOR
+install.packages("colorBlindness")
+library(colorBlindness)
+
+p1 <- ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point()
+
+cvdPlot(p1)
+
+
+# Transparencia: alpha em geom_point
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic()
+
+
+# Trocando a cor dos pontos
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length)) +
+  geom_point(color = "red")
+
+# Cores por especie
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic()
+
+
+# Trocando as cores manualmente: podemos colocar o nome da cor ou o codigo hexadecimal
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic() +
+  scale_color_manual(values = c("purple", "orange","#3333C4FE"))
+
+# Pacotes com escalas de cores que podem ser muuuuito interessantes
+
+## RColorBrewer: tem muuuuitas paletas interessantes, com cores que combinam!
+library(RColorBrewer)
+
+# Vendo as paletas desse pacote
+display.brewer.all(colorblindFriendly = TRUE) 
+
+# Usando a paleta PuRd
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic() +
+  scale_color_brewer(palette = "PuRd")
+
+## Como escolher a cor dentro da paleta
+paleta <- brewer.pal(n = 9, name = "PuRd")[c(3,5,9)]
+paleta
+
+
+#Inserindo a paleta no grafico
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic() +
+  scale_color_manual(values = paleta)
+
+## ggsci: tem paletas de revistas, series e filmes famosos
+install.packages("ggsci")
+library(ggsci)
+
+# Cores de Futurama
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic() +
+  scale_color_futurama()
+
+# Cores de Rick and Morty
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic() +
+  scale_color_rickandmorty()
+
+# Cores da Nature
+ggplot(iris, aes(x = Sepal.Width, y = sepal.Length, color = Species)) +
+  geom_point(alpha = 0.5, size = 4) +
+  theme_classic() +
+  scale_color_npg()
+
 
 
 
